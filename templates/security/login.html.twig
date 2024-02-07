@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+    <main class="main-in-landingpage">
+        <img class="logo-in-main" src="logo-garage.png" alt="logo du garage">
+        <p class="title-in-main">Gestion des rendez-vous</p>
+        <button class="login-button">CONNEXION</button>
+    </main>
+
+    <div class="login-form">
+        <div class="closebutton_container">
+            <p class="instruction_modal">Entrez vos identifiants :</p>
+            <span class="closebutton_modal">X</span>
+        </div>
+        <form method="post" class="inputs-container-login">
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+        
+            <label for="inputEmail">Email</label>
+            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control input-in-login-form" autocomplete="email" required autofocus>
+            <label for="inputPassword">Password</label>
+            <input type="password" name="password" id="inputPassword" class="form-control input-in-login-form" autocomplete="current-password" required>
+        
+            <input type="hidden" name="_csrf_token"
+                   value="{{ csrf_token('authenticate') }}"
+            >
+        
+            <button class="btn btn-lg btn-primary" type="submit" id="submit-login">
+                SE CONNECTER
+            </button>
+        </form>
+    </div>
+
+
+
+    <script src="login.js"></script>
+
+{% endblock %}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Garage Trempu - Gestion RDV</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        {% block stylesheets %}
+        {% endblock %}
+
+        {% block javascripts %}
+{% block importmap %}{{ importmap('app') }}{% endblock %}
+        {% endblock %}
+          <link rel="stylesheet" href="./assets/styles/app.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@400;500;700&family=Noto+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/70fabb1b7e.js" crossorigin="anonymous"></script>
+    </head>
+     <body>
+        <header class="header-form">
+            <img class="logo-form" src="logo-garage.png" alt="logo du garage">
+            <a class="return-button-form" >Retour</a>
+        </header>
+
+        <main class="main-form">
+            <h2 class="form_title">AJOUTER UN RENDEZ-VOUS</h2>
+            <form method="post" accept-charset="UTF-8" class="form_container">
+                <div class="form-date-time_container">
+                    <div class="form-date_container">
+                        <label for="form-date" class="form-label">Date du RDV</label>
+                        <input class="input-date" id="form-date" type="date" name="dateRDV">
+                    </div>
+                    <div class="form-date_container">
+                        <label for="form-date" class="form-label">Heure</label>
+                        <select class="input-date" name="heure" id="form-time">
+                            <option value="08:00:00">8h00</option>
+                            <option value="09:00:00">9h00</option>
+                            <option value="10:00:00">10h00</option>
+                            <option value="11:00:00">11h00</option>
+                            <option value="12:00:00">12h00</option>
+                            <option value="13:00:00">13h00</option>
+                            <option value="14:00:00">14h00</option>
+                            <option value="15:00:00">15h00</option>
+                            <option value="16:00:00">16h00</option>
+                            <option value="17:00:00">17h00</option>
+                            <option value="18:00:00">18h00</option>
+                            <option value="19:00:00">19h00</option>
+                          </select>                    
+                    </div>
+                </div>
+
+                <div class="form-date-time_container form-client-info_container">
+                    <div class="form-date_container">
+                        <label for="form-client" class="form-label">Client</label>
+                        <input class="input-date" id="form-client" type="text" name="proprietaire">
+                    </div>
+                    <div class="form-date_container">
+                        <label for="form-telephone" class="form-label">Téléphone</label>
+                        <input class="input-date input-telephone" id="form-telephone" type="text" name="telephone">
+                    </div>
+                </div>
+                <div class="form-vehicule_container">
+                    <label for="form-vehicule" class="form-label">Véhicule</label>
+                    <input id="form-vehicule" class="input-date" type="text" name="vehicule">
+                </div>
+                <div class="form-purpose_container">
+                    <label for="form-purpose" class="form-label">Motif du RDV</label>
+                    <input id="form-purpose" class="input-date" type="text" name="motif">
+                </div>
+                <div class="submit-form-button_container">
+                    <button class="submit-rdv-button">AJOUTER</button>
+                </div>
+            </form>
+        </main>
+    </body>
+</html>

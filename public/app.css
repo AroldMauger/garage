@@ -1,0 +1,334 @@
+
+/* index.htlm */
+
+body {
+    background-color: black;
+    margin:0px;
+    font-family: 'Noto Sans';
+}
+
+.main-in-landingpage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.title-in-main {
+    color: #FF6000;
+    font-size: 50px;
+    font-weight: 700;
+    padding-top: 10px;
+    margin-bottom: 100px;
+    text-align: center;
+}
+
+.login-button {
+    border: 5px solid #FFF;
+    background: #FF6000;
+    font-family: 'Noto Sans';
+    font-weight: 700;
+    font-size: 26px;
+    padding:26px ;
+    cursor: pointer;
+}
+
+/*LOGIN MODAL IN INDEX.HTML */
+
+.login-form {
+    position: absolute;
+    margin: auto;
+    display: none;
+    flex-direction: column;
+    background-color: #FFA559;
+    width: 40%;
+    padding:15px;
+    bottom:25px;
+    left:30%;
+    border: 1px solid black;
+}
+.input-in-login-form {
+    cursor: pointer;
+    height: 45px;
+    width: 275px;
+    text-align: center;
+    font-weight: 800;
+    border: 1px solid black;
+    font-size: 20px;
+}
+
+.input-in-login-form:hover {
+    box-shadow: 0px 8px 8px -7px #000000;
+}
+
+.inputs-container-login {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 15px;
+    padding-left: 100px;
+}
+
+#submit-login {
+    cursor: pointer;
+    border: 2px solid #000;
+    background: #FF6000;
+    color:blakc;
+    padding: 6px 20px 6px 20px;
+    font-size: 20px;
+    font-weight: 800;
+    margin-top: 10px;
+}
+
+#submit-login:hover {
+    background-color: #F3F9B0;
+}
+
+.closebutton_container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.closebutton_modal {
+    border: 2px solid #000;
+    padding:5px;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    width: 5%;
+    font-size: 30px;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.closebutton_modal:hover {
+    background-color: #FF6000;
+}
+
+.instruction_modal {
+    color: #3E4A3D;
+    font-size: 24px;
+    padding-left: 100px;
+    font-weight: 600;
+    margin-top:0px;
+    margin-bottom: 25px;
+    font-family: 'Noto sans';
+}
+
+
+/* dashboard.html */
+
+.header-dashboard {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo-dashboard, .logo-form {
+    width: 16%;
+}
+
+.nav-dashboard {
+    display: flex;
+    gap:40px;
+    padding-right: 50px;
+
+}
+
+.nav-dashboard a, .return-button-form{
+    border: 3px solid #FFF;
+    background: #FF6000;
+    color: #000;
+    padding:10px 14px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 22px;
+    
+}
+
+.main-dashboard {
+    background-color:#CF0A0A ;
+    padding:50px;
+}
+
+.rdv-filter_container {
+    border-radius: 22px;
+    border: 4px solid #FFF;
+    background: #454545;
+    padding:10px;
+    color:white;
+    font-family: 'Noto Sans';
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 100px;
+}
+
+.rdv-all-cards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap:70px;
+}
+
+.rdv-card_container {
+    width: 18%;
+    display: flex;
+    flex-direction: column;
+}
+
+.rdv-date {
+    color:white;
+    font-size: 18px;
+    text-align: end;
+    font-weight: 700;
+}
+
+.rdv-card {
+    border: 5px solid #000;
+    background: #EEE;
+    box-shadow: 10px 8px 4px 0px #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.rdv-time {
+    background-color: white;
+    margin:0px;
+    width: 100%;
+    text-align: center;
+    padding-block: 12px;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.rdv-purpose {
+    background-color: #FFA559;
+    border: 1px solid #000;
+    margin:0px;
+    width: 100%;
+    text-align: center;
+    padding-block: 12px;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.rdv-owner_container {
+    background-color: #DC5F00;
+    border: 1px solid #000;
+    margin:0px;
+    width: 100%;
+    text-align: center;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.rdv-car, .rdv-owner {
+    margin-block:8px;
+}
+
+.rdv-button-modifier {
+    margin-top: 14px;
+    border: 2px solid #000;
+    background: #B0F9C0;
+    color: #000;
+    font-family: 'Noto Sans';
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 5.06px;
+    padding:8px;
+}
+
+/* add_rdv.html */
+
+.header-form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 70px;
+}
+
+.main-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form_title {
+    color: #FFF;
+    margin-top: 0px;
+    font-family: 'Noto Sans';
+    font-size: 34px;
+    font-weight: 700;
+}
+
+.form-date-time_container {
+    color:white;
+    display: flex;
+    flex-direction: row;
+    gap:50px;
+
+}
+.form-date_container {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-label {
+    color: #FFF;
+    font-family: 'Noto Sans';
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.input-date {
+    padding:12px;
+    font-family: 'Noto Sans';
+    font-size: 16px;
+    font-weight: 700;
+    background-color: #F3F9B0;
+}
+
+.input-telephone {
+    width: 86%;
+}
+
+.form-client-info_container {
+    margin-top: 20px;
+}
+
+.form_container {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-vehicule_container, .form-purpose_container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.submit-form-button_container {
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.submit-rdv-button {
+    border: 3px solid #FFF;
+    background: #FF6000;
+    color: #000;
+    padding:10px 14px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 22px;
+    margin-top: 20px;
+}
+
+
+.signup-confirmation-message{
+    color:white;
+}

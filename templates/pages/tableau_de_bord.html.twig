@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Garage Trempu - Gestion RDV</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        {% block stylesheets %}
+        {% endblock %}
+
+        {% block javascripts %}
+{% block importmap %}{{ importmap('app') }}{% endblock %}
+        {% endblock %}
+          <link rel="stylesheet" href="./assets/styles/app.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@400;500;700&family=Noto+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/70fabb1b7e.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <header class="header-dashboard">
+            <img class="logo-dashboard" src="logo-garage.png" alt="logo du garage">
+            <nav class="nav-dashboard">
+                <a href="/front-end/pages/add_rdv.html">Nouveau RDV</a>
+                <a href="">Historique RDV</a>
+                <a href="/index.html">Déconnexion</a>
+            </nav>
+        </header>
+        <main class="main-dashboard">
+            <div class="rdv-filter_container">
+                <span>RENDEZ-VOUS À VENIR</span>
+            </div>
+            <section class="rdv-all-cards">
+
+                <div class="rdv-card_container">
+                    <span class="rdv-date">24/01/2024</span>
+                    <div class="rdv-card">
+                        <p class="rdv-time">9h00-11h00</p>
+                        <p class="rdv-purpose">ENTRETIEN VIDANGE</p>
+                        <div class="rdv-owner_container">
+                            <p class="rdv-car">Peugeot 306</p>
+                            <p class="rdv-owner">M. DUCLOS</p>
+                        </div>
+                    </div>
+                    <button class="rdv-button-modifier">GÉRER LE RDV</button>
+                </div>
+
+                <div class="rdv-card_container">
+                    <span class="rdv-date">24/01/2024</span>
+                    <div class="rdv-card">
+                        <p class="rdv-time">9h00-11h00</p>
+                        <p class="rdv-purpose">ENTRETIEN VIDANGE</p>
+                        <div class="rdv-owner_container">
+                            <p class="rdv-car">Peugeot 306</p>
+                            <p class="rdv-owner">M. DUCLOS</p>
+                        </div>
+                    </div>
+                    <button class="rdv-button-modifier">GÉRER LE RDV</button>
+                </div>
+
+                
+            </section>
+        </main>
+    </body>
+</html>
