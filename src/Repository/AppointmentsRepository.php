@@ -21,28 +21,16 @@ class AppointmentsRepository extends ServiceEntityRepository
         parent::__construct($registry, Appointments::class);
     }
 
-//    /**
-//     * @return Appointments[] Returns an array of Appointments objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('a.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function save(Appointments $appointment): bool
+    {
+        try {
+            $em = $this->getEntityManager();
+            $em->persist($appointment);
+            $em->flush();
 
-//    public function findOneBySomeField($value): ?Appointments
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+            return true;
+        } catch (\Exception $exception) {
+            return false;
+        }
+    }
 }
