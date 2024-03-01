@@ -162,15 +162,17 @@ body {
     font-family: 'Noto Sans';
     font-size: 32px;
     font-weight: 700;
-    margin-bottom: 100px;
+    margin-bottom: 10px;
 }
 
 .rdv-all-cards {
-    position:relative;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     gap:70px;
+    margin-top: 40px;
+    position: relative;
+
 }
 
 .rdv-card_container {
@@ -289,13 +291,14 @@ body {
 .cutted-container {
     display: flex;
     flex-direction: row;
-    gap:25px;
+    gap:20px;
 }
 
 .half-div-container {
     display: flex;
     flex-direction: column;
     color: white;
+    margin-bottom: 10px;
 }
  .label-modal {
     font-weight: 700;

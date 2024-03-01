@@ -33,16 +33,16 @@
 
                 {% for appointment in appointments %}
                 <div class="rdv-card_container">
-                    <span class="rdv-date">{{ appointment.date|date('Y-m-d') }}</span>
+                    <span class="rdv-date">{{ appointment.date|date('d/m/Y') }}</span>
                     <div class="rdv-card">
-                        <p class="rdv-time">{{ appointment.date|date('h:i') }}</p>
+                        <p class="rdv-time">{{ appointment.date|date('H\\hi') }}</p>
                         <p class="rdv-purpose">{{ appointment.reason }}</p>
                         <div class="rdv-owner_container">
                             <p class="rdv-car">{{ appointment.car }}</p>
                             <p class="rdv-owner">{{ appointment.customer }}</p>
                         </div>
                     </div>
-                    <button class="rdv-button-modifier">GÉRER LE RDV</button>
+                    <button class="rdv-button-modifier" data-date="{{ appointment.date|date('d/m/Y') }}" data-time="{{ appointment.date|date('H\\hi') }}" data-reason="{{ appointment.reason }}" data-car="{{ appointment.car }}" data-customer="{{ appointment.customer }}" data-phone="{{ appointment.phone }}">GÉRER LE RDV</button>
                 </div>
 
                 <!-- ICI LE CODE DE LA MODALE-->
@@ -55,29 +55,29 @@
                             <div class="cutted-container">
                                 <div class="half-div-container">
                                     <span class="label-modal">Date du RDV</span>
-                                    <span class="data-modal"> {{ appointment.date|date('Y-m-d') }}</span>
+                                    <span class="data-modal data-modal-date"> {{ appointment.date|date('d/m/Y') }}</span>
                                 </div>
                                 <div class="half-div-container">
                                     <span class="label-modal">Heure</span>
-                                    <span class="data-modal">{{ appointment.date|date('h:i') }}</span>
+                                    <span class="data-modal data-modal-time">{{ appointment.date|date('H\\hi') }}</span>
                                 </div>
                             </div>
                             <div class="half-div-container">
                                 <span class="label-modal">Motif du RDV</span>
-                                <span class="data-modal"> {{ appointment.reason }}</span>
+                                <span class="data-modal data-modal-reason"> {{ appointment.reason }}</span>
                             </div>
                             <div class="half-div-container">
                                 <span class="label-modal">Véhicule</span>
-                                <span class="data-modal"> {{ appointment.car }}</span>
+                                <span class="data-modal data-modal-car"> {{ appointment.car }}</span>
                             </div>
                             <div class="cutted-container">
                                 <div class="half-div-container">
                                     <span class="label-modal">Client</span>
-                                    <span class="data-modal"> {{ appointment.customer }}</span>
+                                    <span class="data-modal data-modal-customer"> {{ appointment.customer }}</span>
                                 </div>
                                 <div class="half-div-container">
                                     <span class="label-modal">Téléphone</span>
-                                    <span class="data-modal">{{ appointment.phone }}</span>
+                                    <span class="data-modal data-modal-phone">{{ appointment.phone }}</span>
                                 </div>
                             </div>
                         </section>
