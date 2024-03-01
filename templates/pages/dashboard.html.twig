@@ -31,32 +31,24 @@
             </div>
             <section class="rdv-all-cards">
 
+                {% for appointment in appointments %}
                 <div class="rdv-card_container">
-                    <span class="rdv-date">24/01/2024</span>
+                    <span class="rdv-date">{{ appointment.date|date('Y-m-d') }}</span>
                     <div class="rdv-card">
-                        <p class="rdv-time">9h00-11h00</p>
-                        <p class="rdv-purpose">ENTRETIEN VIDANGE</p>
+                        <p class="rdv-time">{{ appointment.date|date('h:i') }}</p>
+                        <p class="rdv-purpose">{{ appointment.reason }}</p>
                         <div class="rdv-owner_container">
-                            <p class="rdv-car">Peugeot 306</p>
-                            <p class="rdv-owner">M. DUCLOS</p>
+                            <p class="rdv-car">{{ appointment.car }}</p>
+                            <p class="rdv-owner">{{ appointment.customer }}</p>
                         </div>
                     </div>
                     <button class="rdv-button-modifier">GÉRER LE RDV</button>
                 </div>
 
-                <div class="rdv-card_container">
-                    <span class="rdv-date">24/01/2024</span>
-                    <div class="rdv-card">
-                        <p class="rdv-time">9h00-11h00</p>
-                        <p class="rdv-purpose">ENTRETIEN VIDANGE</p>
-                        <div class="rdv-owner_container">
-                            <p class="rdv-car">Peugeot 306</p>
-                            <p class="rdv-owner">M. DUCLOS</p>
-                        </div>
-                    </div>
-                    <button class="rdv-button-modifier">GÉRER LE RDV</button>
+                <div>
+                    <!-- ICI LE CODE DE LA MODALE-->
                 </div>
-
+            {% endfor %}
                 
             </section>
         </main>

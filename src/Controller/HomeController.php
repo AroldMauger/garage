@@ -11,13 +11,15 @@ use App\Repository\UsersRepository;
 use App\Form\NewAppointmentType;
 use Symfony\Component\HttpFoundation\Request;
 use App\Repository\AppointmentsRepository;
-
+use \DateTime;
 class HomeController extends AbstractController {
 
     #[Route('/dashboard', name:"dashboard", methods: ['GET'])]
-    public function dashboard()
+    public function dashboard(AppointmentsRepository $repo)
     {
-       return $this->render("pages/dashboard.html.twig");
+        $date = new DateTime();
+        $appointments = $repo->findByDate($date);
+       return $this->render("pages/dashboard.html.twig", ["appointments" => $appointments]);
     }
 
     #[Route('/new_appointment', name:"new_appointment")]

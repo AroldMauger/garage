@@ -5,7 +5,7 @@ namespace App\Repository;
 use App\Entity\Appointments;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-
+use \DateTimeInterface;
 /**
  * @extends ServiceEntityRepository<Appointments>
  *
@@ -32,5 +32,22 @@ class AppointmentsRepository extends ServiceEntityRepository
         } catch (\Exception $exception) {
             return false;
         }
+    }
+    public function findByDate(DateTimeInterface $date)
+    {
+        $dayBefore = date('Y-m-d', strtotime($date->format('Y-m-d') .' -1 day'));
+        $dayAfter = date('Y-m-d', strtotime($date->format('Y-m-d') .' +1 day'));
+
+        return $this->createQueryBuilder('a')
+            ->select('a')
+            ->where('a.status = :status')
+            ->setParameter('status', "en cours")
+            ->andWhere('a.date > :before')
+            ->setParameter('before', $dayBefore)
+            ->andWhere('a.date < :after')
+            ->setParameter('after', $dayAfter)
+            ->getQuery()
+            ->getResult()
+        ;
     }
 }
