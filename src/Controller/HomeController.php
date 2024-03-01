@@ -36,6 +36,12 @@ class HomeController extends AbstractController {
         return $this->render("pages/formulaire_rdv.html.twig", ["form" => $form->createView()]);
         
     }
-    
+    #[Route('/history', name:"history", methods: ['GET'])]
+    public function history(AppointmentsRepository $repo)
+    {
+        $date = new DateTime();
+        $appointments = $repo->findByDate($date);
+       return $this->render("pages/history.html.twig", ["appointments" => $appointments]);
+    }
 }
 

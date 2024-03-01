@@ -8,9 +8,9 @@
         {% endblock %}
 
         {% block javascripts %}
-{% block importmap %}{{ importmap('app') }}{% endblock %}
+        {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
-          <link rel="stylesheet" href="app.css">
+        <link rel="stylesheet" href="app.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@400;500;700&family=Noto+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -21,32 +21,39 @@
             <img class="logo-dashboard" src="logo-garage.png" alt="logo du garage">
             <nav class="nav-dashboard">
                 <a href="/new_appointment">Nouveau RDV</a>
-                <a href="/history">Historique RDV</a>
+                <a href="/dashboard">Tableau de bord</a>
                 <a href="/logout">Déconnexion</a>
             </nav>
         </header>
         <main class="main-dashboard">
-            <div class="rdv-filter_container">
-                <span>RENDEZ-VOUS À VENIR</span>
+            <div class="history-filter_container">
+                <span>HISTORIQUE DES RENDEZ-VOUS</span>
             </div>
             <section class="rdv-all-cards">
-
-                {% for appointment in appointments %}
-                <div class="rdv-card_container">
-                    <span class="rdv-date">{{ appointment.date|date('d/m/Y') }}</span>
-                    <div class="rdv-card">
-                        <p class="rdv-time">{{ appointment.date|date('H\\hi') }}</p>
-                        <p class="rdv-purpose">{{ appointment.reason }}</p>
-                        <div class="rdv-owner_container">
-                            <p class="rdv-car">{{ appointment.car }}</p>
-                            <p class="rdv-owner">{{ appointment.customer }}</p>
-                        </div>
-                    </div>
-                    <button class="rdv-button-modifier" data-date="{{ appointment.date|date('d/m/Y') }}" data-time="{{ appointment.date|date('H\\hi') }}" data-reason="{{ appointment.reason }}" data-car="{{ appointment.car }}" data-customer="{{ appointment.customer }}" data-phone="{{ appointment.phone }}">GÉRER LE RDV</button>
-                </div>
-
-                <!-- ICI LE CODE DE LA MODALE-->
-                <div class="modal-dashboard">
+                <table class="table-history">
+                    <thead>
+                        <tr>
+                            <th class="orange-bg">DATE</th>
+                            <th class="orange-bg">MOTIF DU RDV</th>
+                            <th class="orange-bg">VÉHICULE</th>
+                            <th class="orange-bg">CLIENT</th>
+                            <th class="button-column"></th> 
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for appointment in appointments %}
+                        <tr class="lign-table">
+                            <td>{{ appointment.date|date('d/m/Y') }}</td>
+                            <td>{{ appointment.reason }}</td>
+                            <td>{{ appointment.car }}</td>
+                            <td>{{ appointment.customer }}</td>
+                            <td class="button-column"><button class="button-table" data-date="{{ appointment.date|date('d/m/Y') }}" data-time="{{ appointment.date|date('H\\hi') }}" data-reason="{{ appointment.reason }}" data-car="{{ appointment.car }}" data-customer="{{ appointment.customer }}" data-phone="{{ appointment.phone }}">Voir infos</button></td> 
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                        <!-- ICI LE CODE DE LA MODALE-->
+                <div class="modal-history">
                     <div class="closebuttonmodal_container">
                         <button class="closebutton_modal orange-bg">X</button>
                     </div>
@@ -55,45 +62,40 @@
                             <div class="cutted-container">
                                 <div class="half-div-container">
                                     <span class="label-modal">Date du RDV</span>
-                                    <span class="data-modal data-modal-date"> {{ appointment.date|date('d/m/Y') }}</span>
+                                    <span class="data-modal data-modal-date"></span>
                                 </div>
                                 <div class="half-div-container">
                                     <span class="label-modal">Heure</span>
-                                    <span class="data-modal data-modal-time">{{ appointment.date|date('H\\hi') }}</span>
+                                    <span class="data-modal data-modal-time"></span>
                                 </div>
                             </div>
                             <div class="half-div-container">
                                 <span class="label-modal">Motif du RDV</span>
-                                <span class="data-modal data-modal-reason"> {{ appointment.reason }}</span>
+                                <span class="data-modal data-modal-reason"></span>
                             </div>
                             <div class="half-div-container">
                                 <span class="label-modal">Véhicule</span>
-                                <span class="data-modal data-modal-car"> {{ appointment.car }}</span>
+                                <span class="data-modal data-modal-car"></span>
                             </div>
                             <div class="cutted-container">
                                 <div class="half-div-container">
                                     <span class="label-modal">Client</span>
-                                    <span class="data-modal data-modal-customer"> {{ appointment.customer }}</span>
+                                    <span class="data-modal data-modal-customer"></span>
                                 </div>
                                 <div class="half-div-container">
                                     <span class="label-modal">Téléphone</span>
-                                    <span class="data-modal data-modal-phone">{{ appointment.phone }}</span>
+                                    <span class="data-modal data-modal-phone"></span>
                                 </div>
                             </div>
                         </section>
                         <aside class="aside-modal">
-                            <button id="finish-button" class="button-modal"> RDV TERMINÉ</button>
                             <button id="modify-button" class="button-modal">MODIFIER</button>
                             <button id="delete-button" class="button-modal">SUPPRIMER</button>
                         </aside>
                     </div>                  
                 </div>
-               
-            {% endfor %}
-                
             </section>
         </main>
     </body>
-    <script src="modal.js"></script>
-
+    <script src="modal-history.js"></script>
 </html>
