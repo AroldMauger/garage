@@ -45,12 +45,55 @@
                     <button class="rdv-button-modifier">GÉRER LE RDV</button>
                 </div>
 
-                <div>
-                    <!-- ICI LE CODE DE LA MODALE-->
+                <!-- ICI LE CODE DE LA MODALE-->
+                <div class="modal-dashboard">
+                    <div class="closebuttonmodal_container">
+                        <button class="closebutton_modal orange-bg">X</button>
+                    </div>
+                    <div class="main-container_modal">
+                        <section class="section-modal">
+                            <div class="cutted-container">
+                                <div class="half-div-container">
+                                    <span class="label-modal">Date du RDV</span>
+                                    <span class="data-modal"> {{ appointment.date|date('Y-m-d') }}</span>
+                                </div>
+                                <div class="half-div-container">
+                                    <span class="label-modal">Heure</span>
+                                    <span class="data-modal">{{ appointment.date|date('h:i') }}</span>
+                                </div>
+                            </div>
+                            <div class="half-div-container">
+                                <span class="label-modal">Motif du RDV</span>
+                                <span class="data-modal"> {{ appointment.reason }}</span>
+                            </div>
+                            <div class="half-div-container">
+                                <span class="label-modal">Véhicule</span>
+                                <span class="data-modal"> {{ appointment.car }}</span>
+                            </div>
+                            <div class="cutted-container">
+                                <div class="half-div-container">
+                                    <span class="label-modal">Client</span>
+                                    <span class="data-modal"> {{ appointment.customer }}</span>
+                                </div>
+                                <div class="half-div-container">
+                                    <span class="label-modal">Téléphone</span>
+                                    <span class="data-modal">{{ appointment.phone }}</span>
+                                </div>
+                            </div>
+                        </section>
+                        <aside class="aside-modal">
+                            <button id="finish-button" class="button-modal"> RDV TERMINÉ</button>
+                            <button id="modify-button" class="button-modal">MODIFIER</button>
+                            <button id="delete-button" class="button-modal">SUPPRIMER</button>
+                        </aside>
+                    </div>                  
                 </div>
+               
             {% endfor %}
                 
             </section>
         </main>
     </body>
+    <script src="modal.js"></script>
+
 </html>
