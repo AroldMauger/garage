@@ -33,7 +33,20 @@ class AppointmentsRepository extends ServiceEntityRepository
             return false;
         }
     }
-    public function findByDate(DateTimeInterface $date)
+
+    public function delete(Appointments $appointment): bool
+    {
+        try {
+            $em = $this->getEntityManager();
+            $em->remove($appointment);
+            $em->flush();
+
+            return true;
+        } catch (\Exception $exception) {
+            return false;
+        }
+    }
+    public function findByDate(DateTimeInterface $date, string $status)
     {
         $dayBefore = date('Y-m-d', strtotime($date->format('Y-m-d') .' -1 day'));
         $dayAfter = date('Y-m-d', strtotime($date->format('Y-m-d') .' +1 day'));
@@ -41,7 +54,7 @@ class AppointmentsRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('a')
             ->select('a')
             ->where('a.status = :status')
-            ->setParameter('status', "en cours")
+            ->setParameter('status', $status)
             ->andWhere('a.date > :before')
             ->setParameter('before', $dayBefore)
             ->andWhere('a.date < :after')
@@ -49,5 +62,16 @@ class AppointmentsRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult()
         ;
+    }
+    public function findFinishedPaginated (int $page, int $limit) {
+        return $this->createQueryBuilder('a')
+            ->select('a')
+            ->where('a.status = :status')
+            ->setParameter('status', "terminé")
+            ->orderBy("a.date", "DESC")
+            ->setFirstResult($page * $limit)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
     }
 }

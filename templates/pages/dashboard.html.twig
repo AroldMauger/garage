@@ -82,9 +82,22 @@
                             </div>
                         </section>
                         <aside class="aside-modal">
-                            <button id="finish-button" class="button-modal"> RDV TERMINÉ</button>
+                            <a href="{{ url("finish", {
+                                "id" : appointment.id
+                            }) }}">
+                                <button id="finish-button" class="button-modal"> RDV TERMINÉ</button>
+                            </a>
+
                             <button id="modify-button" class="button-modal">MODIFIER</button>
-                            <button id="delete-button" class="button-modal">SUPPRIMER</button>
+
+                            <a href="{{ url("delete", {
+                                "id" : appointment.id
+                            }) }}">
+                                <button id="delete-button" class="button-modal">SUPPRIMER</button>
+                            </a>
+
+                            <button id="invoice-button" class="button-modal">FACTURE/DEVIS</button>
+
                         </aside>
                     </div>                  
                 </div>

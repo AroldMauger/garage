@@ -73,7 +73,7 @@ body {
     cursor: pointer;
     border: 2px solid #000;
     background: #FF6000;
-    color:blakc;
+    color:black;
     padding: 6px 20px 6px 20px;
     font-size: 20px;
     font-weight: 800;
@@ -322,12 +322,17 @@ body {
  #delete-button {
     background-color: #F9B0B0;
  }
+
+ #invoice-button {
+    background-color: rgb(172, 168, 168);
+ }
  .button-modal {
     padding-block: 5px;
     padding-inline: 20px;
     font-size: 26px;
     font-weight: 700;
     width: 80%;
+     cursor: pointer;
  }
 
 /* add_rdv.html */
