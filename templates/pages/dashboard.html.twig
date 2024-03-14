@@ -48,53 +48,60 @@
                 <!-- ICI LE CODE DE LA MODALE-->
                 <div class="modal-dashboard">
                     <div class="closebuttonmodal_container">
-                        <button class="closebutton_modal orange-bg">X</button>
+                        <button class="closebutton_modal">X</button>
                     </div>
                     <div class="main-container_modal">
                         <section class="section-modal">
-                            <div class="cutted-container">
-                                <div class="half-div-container">
-                                    <span class="label-modal">Date du RDV</span>
-                                    <span class="data-modal data-modal-date"> {{ appointment.date|date('d/m/Y') }}</span>
+                            <div class="section-modal-subcontainer">
+                                <div class="cutted-container">
+                                    <div class="half-div-container">
+                                        <span class="label-modal">Date du RDV</span>
+                                        <span class="data-modal data-modal-date"> {{ appointment.date|date('d/m/Y') }}</span>
+                                    </div>
+                                    <div class="half-div-container">
+                                        <span class="label-modal">Heure</span>
+                                        <span class="data-modal data-modal-time">{{ appointment.date|date('H\\hi') }}</span>
+                                    </div>
                                 </div>
                                 <div class="half-div-container">
-                                    <span class="label-modal">Heure</span>
-                                    <span class="data-modal data-modal-time">{{ appointment.date|date('H\\hi') }}</span>
+                                    <span class="label-modal">Motif du RDV</span>
+                                    <span class="data-modal data-modal-reason"> {{ appointment.reason }}</span>
                                 </div>
                             </div>
-                            <div class="half-div-container">
-                                <span class="label-modal">Motif du RDV</span>
-                                <span class="data-modal data-modal-reason"> {{ appointment.reason }}</span>
-                            </div>
-                            <div class="half-div-container">
-                                <span class="label-modal">Véhicule</span>
-                                <span class="data-modal data-modal-car"> {{ appointment.car }}</span>
-                            </div>
-                            <div class="cutted-container">
-                                <div class="half-div-container">
-                                    <span class="label-modal">Client</span>
-                                    <span class="data-modal data-modal-customer"> {{ appointment.customer }}</span>
-                                </div>
-                                <div class="half-div-container">
-                                    <span class="label-modal">Téléphone</span>
-                                    <span class="data-modal data-modal-phone">{{ appointment.phone }}</span>
-                                </div>
-                            </div>
+                            <div class="section-modal-subcontainer">
+                               <div class="cutted-container">
+                                   <div class="half-div-container">
+                                       <span class="label-modal">Client</span>
+                                       <span class="data-modal data-modal-customer"> {{ appointment.customer }}</span>
+                                   </div>
+                                   <div class="half-div-container">
+                                       <span class="label-modal">Téléphone</span>
+                                       <span class="data-modal data-modal-phone">{{ appointment.phone }}</span>
+                                   </div>
+                               </div>
+                               <div class="half-div-container">
+                                   <span class="label-modal">Véhicule</span>
+                                   <span class="data-modal data-modal-car"> {{ appointment.car }}</span>
+                               </div>
+                           </div>
+
+
                         </section>
                         <aside class="aside-modal">
                             <a href="{{ url("finish", {
                                 "id" : appointment.id
-                            }) }}">
+                            }) }}" class="link-in-modal">
                                 <button id="finish-button" class="button-modal"> RDV TERMINÉ</button>
                             </a>
-                            <a href="{{ url("modify_appointment", {"id" : appointment.id, "from": "dashboard"}) }}">
+                            <a href="{{ url("modify_appointment", {"id" : appointment.id, "from": "dashboard"}) }}" class="link-in-modal">
                                 <button id="modify-button" class="button-modal">MODIFIER</button>
                             </a>
-                            <a href="{{ url("delete", {"id" : appointment.id, "from": "dashboard"}) }}">
+                            <a href="{{ url("delete", {"id" : appointment.id, "from": "dashboard"}) }}" class="link-in-modal">
                                 <button id="delete-button" class="button-modal">SUPPRIMER</button>
                             </a>
-
-                            <button id="invoice-button" class="button-modal">FACTURE/DEVIS</button>
+                            <a class="link-in-modal">
+                                <button id="invoice-button" class="button-modal">FACTURE/DEVIS</button>
+                            </a>
 
                         </aside>
                     </div>                  

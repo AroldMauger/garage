@@ -4,9 +4,11 @@
 
 {% block body %}
     <main class="main-in-landingpage">
-        <img class="logo-in-main" src="logo-garage.png" alt="logo du garage">
-        <p class="title-in-main">Gestion des rendez-vous</p>
-        <button class="login-button">CONNEXION</button>
+        <div class="big-container-in-login">
+            <img class="logo-in-main" src="logo-garage.png" alt="logo du garage">
+                <button class="login-button">CONNEXION</button>
+        </div>
+
     </main>
 
     <div class="login-form">
@@ -27,10 +29,11 @@
             <input type="hidden" name="_csrf_token"
                    value="{{ csrf_token('authenticate') }}"
             >
-        
-            <button class="btn btn-lg btn-primary" type="submit" id="submit-login">
-                SE CONNECTER
-            </button>
+            <div class="login-button-container">
+                <button class="btn btn-lg btn-primary" type="submit" id="submit-login">
+                    SE CONNECTER
+                </button>
+            </div>
         </form>
     </div>
 
