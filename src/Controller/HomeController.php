@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Appointments;
+use App\Form\ModifyAppointmentType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\httpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -57,18 +58,36 @@ class HomeController extends AbstractController {
         $repo->save($appointment);
         return $this->redirectToRoute("dashboard");
     }
-    #[Route('/delete/{id}', name:"delete", methods: ['GET'])]
-    public function delete(#[MapEntity(id:"id")] Appointments $appointment, AppointmentsRepository $repo)
+    #[Route('/delete/{id}/{from}', name:"delete", methods: ['GET'])]
+    public function delete(
+        #[MapEntity(id:"id")] Appointments $appointment,
+        AppointmentsRepository $repo,
+        string $from
+    )
     {
         $repo->delete($appointment);
-        return $this->redirectToRoute("dashboard");
+        return match ($from) {
+            'dashboard' => $this->redirectToRoute('dashboard'),
+            'history' => $this->redirectToRoute('history'),
+        };
     }
 
-    #[Route('/deletefromhistory/{id}', name:"deletefromhistory", methods: ['GET'])]
-    public function deleteFromHistory(#[MapEntity(id:"id")] Appointments $appointment, AppointmentsRepository $repo)
+    #[Route('/modify_appointment/{id}/{from}', name: "modify_appointment")]
+    public function modifyAppointment(
+        #[MapEntity(id:"id")] Appointments $appointment,
+        AppointmentsRepository $repo, Request $request,
+        string $from)
     {
-        $repo->deleteFromHistory($appointment);
-        return $this->redirectToRoute("history");
+        $form = $this->createForm(ModifyAppointmentType::class, $appointment);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $appointment = $form->getData();
+            $repo->save($appointment);
+            return match ($from) {
+                'dashboard' => $this->redirectToRoute('dashboard'),
+                'history' => $this->redirectToRoute('history'),
+            };        }
+        return $this->render("pages/modify_appointment.html.twig", ["form" => $form->createView()]);
     }
 }
 

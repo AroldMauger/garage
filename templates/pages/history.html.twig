@@ -88,10 +88,13 @@
                             </section>
 
                             <aside class="aside-modal">
-                                <button id="modify-button" class="button-modal">MODIFIER</button>
-                                <a href="{{ url("deletefromhistory", {"id" : appointment.id}) }}">
+                                <a href="{{ url("modify_appointment", {"id" : appointment.id, "from": "history"}) }}">
+                                    <button id="modify-button" class="button-modal">MODIFIER</button>
+                                </a>
+                                <a href="{{ url("delete", {"id" : appointment.id, "from": "history"}) }}">
                                     <button id="delete-button" class="button-modal">SUPPRIMER</button>
                                 </a>
+
                             </aside>
                         </div>
                     </div>

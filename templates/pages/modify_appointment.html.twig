@@ -10,7 +10,7 @@
         {% block javascripts %}
 {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
-          <link rel="stylesheet" href="app.css">
+        <link rel="stylesheet" href="{{ asset('app.css') }}">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@400;500;700&family=Noto+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -23,7 +23,7 @@
         </header>
 
         <main class="main-form">
-            <h2 class="form_title">AJOUTER UN RENDEZ-VOUS</h2>
+            <h2 class="form_title">MODIFIER UN RENDEZ-VOUS</h2>
             {{ form_start(form) }}
                 <div class="form-date-time_container">
                     <div class="form-date_container">
@@ -51,7 +51,7 @@
                     {{ form_widget(form.reason) }}
                 </div>
                 <div class="submit-form-button_container">
-                    <button class="submit-rdv-button">AJOUTER</button>
+                    <button class="submit-rdv-button">MODIFIER</button>
                 </div>
             {{ form_end(form) }}
 

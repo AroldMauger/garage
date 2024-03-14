@@ -87,12 +87,10 @@
                             }) }}">
                                 <button id="finish-button" class="button-modal"> RDV TERMINÉ</button>
                             </a>
-
-                            <button id="modify-button" class="button-modal">MODIFIER</button>
-
-                            <a href="{{ url("delete", {
-                                "id" : appointment.id
-                            }) }}">
+                            <a href="{{ url("modify_appointment", {"id" : appointment.id, "from": "dashboard"}) }}">
+                                <button id="modify-button" class="button-modal">MODIFIER</button>
+                            </a>
+                            <a href="{{ url("delete", {"id" : appointment.id, "from": "dashboard"}) }}">
                                 <button id="delete-button" class="button-modal">SUPPRIMER</button>
                             </a>
 
