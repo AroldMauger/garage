@@ -63,5 +63,12 @@ class HomeController extends AbstractController {
         $repo->delete($appointment);
         return $this->redirectToRoute("dashboard");
     }
+
+    #[Route('/deletefromhistory/{id}', name:"deletefromhistory", methods: ['GET'])]
+    public function deleteFromHistory(#[MapEntity(id:"id")] Appointments $appointment, AppointmentsRepository $repo)
+    {
+        $repo->deleteFromHistory($appointment);
+        return $this->redirectToRoute("history");
+    }
 }
 

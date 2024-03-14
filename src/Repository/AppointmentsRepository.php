@@ -46,6 +46,18 @@ class AppointmentsRepository extends ServiceEntityRepository
             return false;
         }
     }
+    public function deleteFromHistory(Appointments $appointment): bool
+    {
+        try {
+            $em = $this->getEntityManager();
+            $em->remove($appointment);
+            $em->flush();
+
+            return true;
+        } catch (\Exception $exception) {
+            return false;
+        }
+    }
     public function findByDate(DateTimeInterface $date, string $status)
     {
         $dayBefore = date('Y-m-d', strtotime($date->format('Y-m-d') .' -1 day'));
