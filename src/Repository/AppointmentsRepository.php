@@ -86,4 +86,13 @@ class AppointmentsRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+    public function countAllInProgress()
+    {
+        return $this->createQueryBuilder('a')
+            ->select('COUNT(a)')
+            ->where('a.status = :status')
+            ->setParameter('status', 'en cours')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
 }

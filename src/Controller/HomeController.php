@@ -16,12 +16,21 @@ use App\Repository\AppointmentsRepository;
 use \DateTime;
 class HomeController extends AbstractController {
 
-    #[Route('/dashboard', name:"dashboard", methods: ['GET'])]
-    public function dashboard(AppointmentsRepository $repo)
+    #[Route('/dashboard', name: 'dashboard', methods: ['GET', 'POST'])]
+    public function dashboard(AppointmentsRepository $repo, Request $request)
     {
-        $date = new DateTime();
-        $appointments = $repo->findByDate($date, "en cours");
-       return $this->render("pages/dashboard.html.twig", ["appointments" => $appointments]);
+        $selectedDate = $request->request->get('selected-date');
+
+        if ($selectedDate) {
+            $date = new DateTime($selectedDate);
+            $appointments = $repo->findByDate($date, "en cours");
+        } else {
+            $appointments = $repo->findBy(['status' => 'en cours']);
+        }
+        $totalAppointmentsInCurrentPage = count($appointments);
+        $totalAppointments = $repo->countAllInProgress();
+
+        return $this->render("pages/dashboard.html.twig", ["appointments" => $appointments,"totalAppointments" => $totalAppointments, "totalAppointmentsInCurrentPage" => $totalAppointmentsInCurrentPage]);
     }
 
     #[Route('/new_appointment', name:"new_appointment")]
@@ -43,7 +52,6 @@ class HomeController extends AbstractController {
         $page = $request->get('page', 0);
         $limit = $request->get('limit', 10);
         $count = $repo->count(["status" => "terminé"]);
-        $date = new DateTime();
         $appointments = $repo->findFinishedPaginated($page, $limit);
         $totalPages = (int) ceil($count/$limit);
         $previousPage = $page == 0? null:$page-1;

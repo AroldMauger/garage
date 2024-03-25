@@ -27,14 +27,19 @@
         </header>
         <main class="main-dashboard">
             <div class="rdv-filter_container">
-                <span>RENDEZ-VOUS À VENIR</span>
+                <span>RENDEZ-VOUS À VENIR ({{ totalAppointmentsInCurrentPage }})</span>
             </div>
-            <div class="select-date-container">
-                <input type="date" id="selected-date" name="selected-date">
-                <button type="submit" class="button-filterbydate">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
-            </div>
+            <form action="{{ path('dashboard') }}" method="post" class="form-filter-dashboard">
+                <div class="select-date-container">
+                    <input type="date" id="selected-date" name="selected-date">
+                    <button type="submit" class="button-filterbydate">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+                <div class="link-see-all-container">
+                    <a href="{{ path('dashboard') }}">Voir tout ({{ totalAppointments }})</a>
+                </div>
+            </form>
 
             <section class="rdv-all-cards">
                 {% for appointment in appointments %}
