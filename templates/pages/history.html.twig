@@ -30,6 +30,27 @@
                 <span>HISTORIQUE DES RENDEZ-VOUS</span>
             </div>
             <section class="rdv-all-cards">
+                <div class="pagination-container">
+
+                    {% if previousPage is not null %}
+                        <a href="{{ url("history", {"page" : firstPage}) }}">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </a>
+
+                        <a href="{{ url("history", {"page" : previousPage}) }}"> {{ previousPage }}</a>
+                    {% endif %}
+                    <span class="current-page-link" > {{ page }}</span>
+
+                    {% if nextPage is not null %}
+
+                        <a href="{{ url("history", {"page" : nextPage}) }}"> {{ nextPage }}</a>
+
+                        <a href="{{ url("history", {"page" : lastPage}) }}">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </a>
+                    {% endif %}
+
+                </div>
                 <table class="table-history">
                     <thead>
                     <tr class="header-table-items">

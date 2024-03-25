@@ -185,7 +185,7 @@ body {
 .rdv-all-cards {
     display: flex;
     flex-wrap: wrap;
-    gap: 4rem;
+    gap: 1rem;
     margin-top: 4rem;
 }
 
@@ -494,6 +494,32 @@ body {
 .button-table:hover {
     background-color: #FF4500;
 }
+
+.pagination-container {
+    text-align: end;
+    width: 100%;
+    font-size: 22px;
+    display: flex;
+    gap:25px;
+    justify-content: end;
+    align-items: center;
+    align-content: center
+;
+}
+
+.pagination-container a {
+    text-decoration: underline #FF6000;
+    color:#FF6000;
+}
+
+.pagination-container a:hover {
+    text-decoration: underline #000000;
+    color:#000000;
+}
+.current-page-link {
+    color:#000000;
+}
+
 
 /* Modal dans history.html */
 

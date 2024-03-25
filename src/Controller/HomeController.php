@@ -41,15 +41,18 @@ class HomeController extends AbstractController {
     public function history(AppointmentsRepository $repo, Request $request)
     {
         $page = $request->get('page', 0);
-        $limit = $request->get('limit', 10);
+        $limit = $request->get('limit', 2);
         $count = $repo->count(["status" => "terminé"]);
         $date = new DateTime();
         $appointments = $repo->findFinishedPaginated($page, $limit);
         $totalPages = (int) ceil($count/$limit);
         $previousPage = $page == 0? null:$page-1;
-        $nextPage = ($page == $totalPages || $page>$totalPages) ? null:$page+1;
+        $nextPage = ($page+1 == $totalPages || $page>$totalPages) ? null:$page+1;
+        $firstPage = $page == 0? null: 0;
+        $lastPage = $totalPages - 1;
 
-       return $this->render("pages/history.html.twig", ["appointments" => $appointments, "previousPage" => $previousPage, "nextPage" => $nextPage]);
+        dump($totalPages);
+       return $this->render("pages/history.html.twig", ["appointments" => $appointments, "firstPage" => $firstPage, "lastPage" => $lastPage, "previousPage" => $previousPage, "nextPage" => $nextPage, "page" => $page]);
     }
     #[Route('/finish/{id}', name:"finish", methods: ['GET'])]
     public function finish(#[MapEntity(id:"id")] Appointments $appointment, AppointmentsRepository $repo)
