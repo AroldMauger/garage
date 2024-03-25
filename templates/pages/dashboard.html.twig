@@ -29,8 +29,14 @@
             <div class="rdv-filter_container">
                 <span>RENDEZ-VOUS À VENIR</span>
             </div>
-            <section class="rdv-all-cards">
+            <div class="select-date-container">
+                <input type="date" id="selected-date" name="selected-date">
+                <button type="submit" class="button-filterbydate">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
 
+            <section class="rdv-all-cards">
                 {% for appointment in appointments %}
                 <div class="rdv-card_container">
                     <span class="rdv-date">{{ appointment.date|date('d/m/Y') }}</span>

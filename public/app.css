@@ -181,6 +181,34 @@ body {
     font-weight: 700;
     margin-bottom: 2rem;
 }
+.select-date-container {
+    display: flex;
+    font-size: 24px;
+    text-align: end;
+    align-items: end;
+    justify-content: end;
+    gap:1rem;
+}
+
+.button-filterbydate {
+    background-color: white;
+    font-size: 20px;
+    padding: 6px;
+}
+.button-filterbydate i {
+    color: #FF6000;
+}
+.button-filterbydate:hover{
+    cursor: pointer;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+}
+#selected-date {
+    padding: 10px;
+}
+#selected-date:hover{
+  cursor: pointer;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+}
 
 .rdv-all-cards {
     display: flex;
