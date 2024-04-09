@@ -50,7 +50,7 @@ class HomeController extends AbstractController {
     public function history(AppointmentsRepository $repo, Request $request)
     {
         $page = $request->get('page', 0);
-        $limit = $request->get('limit', 10);
+        $limit = $request->get('limit', 2);
         $count = $repo->count(["status" => "terminé"]);
         $appointments = $repo->findFinishedPaginated($page, $limit);
         $totalPages = (int) ceil($count/$limit);
@@ -59,7 +59,6 @@ class HomeController extends AbstractController {
         $firstPage = $page == 0? null: 0;
         $lastPage = $totalPages - 1;
 
-        dump($totalPages);
        return $this->render("pages/history.html.twig", ["appointments" => $appointments, "firstPage" => $firstPage, "lastPage" => $lastPage, "previousPage" => $previousPage, "nextPage" => $nextPage, "page" => $page]);
     }
     #[Route('/finish/{id}', name:"finish", methods: ['GET'])]
