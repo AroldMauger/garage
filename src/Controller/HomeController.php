@@ -99,5 +99,6 @@ class HomeController extends AbstractController {
             };        }
         return $this->render("pages/modify_appointment.html.twig", ["form" => $form->createView()]);
     }
+
 }
 
