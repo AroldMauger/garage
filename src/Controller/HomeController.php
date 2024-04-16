@@ -50,7 +50,7 @@ class HomeController extends AbstractController {
     public function history(AppointmentsRepository $repo, Request $request)
     {
         $page = $request->get('page', 0);
-        $limit = $request->get('limit', 2);
+        $limit = $request->get('limit', 5);
         $count = $repo->count(["status" => "terminé"]);
         $appointments = $repo->findFinishedPaginated($page, $limit);
         $totalPages = (int) ceil($count/$limit);
