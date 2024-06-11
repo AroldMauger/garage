@@ -5,7 +5,6 @@ namespace App\Controller\Api;
 use App\Context\UserApiContext;
 use App\DTO\NewAppointmentDTO;
 use App\Entity\Appointments;
-use App\Form\NewAppointmentType;
 use App\Repository\AppointmentsRepository;
 use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -40,10 +39,11 @@ class AppointmentApiController extends AbstractController
                                     NewAppointmentDTO $newAppointmentDTO,
                                     )
     {
+        $date = new \DateTimeImmutable($newAppointmentDTO->date);
         $appointment = new Appointments();
         $appointment
             ->setStatus("en cours")
-            ->setDate($newAppointmentDTO->date)
+            ->setDate($date)
             ->setCustomer($newAppointmentDTO->customer)
             ->setPhone($newAppointmentDTO->phone)
             ->setCar($newAppointmentDTO->car)
@@ -96,8 +96,9 @@ class AppointmentApiController extends AbstractController
         NewAppointmentDTO $newAppointmentDTO,
         )
     {
+        $date = new \DateTimeImmutable($newAppointmentDTO->date);
         $appointment
-            ->setDate($newAppointmentDTO->date)
+            ->setDate($date)
             ->setCustomer($newAppointmentDTO->customer)
             ->setPhone($newAppointmentDTO->phone)
             ->setCar($newAppointmentDTO->car)

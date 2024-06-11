@@ -16,7 +16,7 @@ class ApiAuthenticationListener
 
     }
 
-    private const TOKEN_HEADER_NAME = "authorization";
+    private const TOKEN_HEADER_NAME = "Authorization";
 
     private function hasHeader(Request $request) {
         return $request ->headers ->has(self::TOKEN_HEADER_NAME);
