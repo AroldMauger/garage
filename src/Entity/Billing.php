@@ -46,7 +46,7 @@ class Billing
     #[ORM\Column]
     private ?float $tva = null;
 
-    #[ORM\OneToMany(mappedBy: 'billing', targetEntity: BillingItem::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'billing', targetEntity: BillingItem::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $items;
 
     public function __construct()
