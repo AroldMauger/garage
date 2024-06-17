@@ -49,6 +49,9 @@ class Billing
     #[ORM\OneToMany(mappedBy: 'billing', targetEntity: BillingItem::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
     private Collection $items;
 
+    #[ORM\Column(length: 50)]
+    private ?string $status = null;
+
     public function __construct()
     {
         $this->items = new ArrayCollection();
@@ -205,6 +208,18 @@ class Billing
                 $item->setBilling(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): static
+    {
+        $this->status = $status;
 
         return $this;
     }

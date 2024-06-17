@@ -162,9 +162,37 @@ body {
     transition: background-color 0.3s ease;
 }
 
-.nav-dashboard a:hover,
-.return-button-form:hover {
+.return-billing {
+    text-decoration: none;
+    color: white;
     background-color: #FF4500;
+    font-weight: 700;
+    font-size: 1.4rem;
+    padding: 1rem 2rem;
+    border-radius: 0.8rem;
+    transition: background-color 0.3s ease;
+}
+
+.billing-dwl {
+    text-decoration: none;
+    color: black;
+    background-color: white;
+    font-weight: 700;
+    font-size: 1.4rem;
+    padding: 1rem 2rem;
+    border-radius: 0.8rem;
+    transition: background-color 0.3s ease;
+    border: 1px solid black;
+    margin-bottom: 10px;
+}
+.nav-dashboard a:hover,
+.return-button-form:hover,
+.return-billing:hover{
+    background-color: grey;
+}
+
+.billing-dwl:hover {
+    background-color: #FF6000;
 }
 
 .main-dashboard {
@@ -598,4 +626,17 @@ body {
 
 .closebutton_modal:hover {
     color: #FF4500;
+}
+
+/* billing_form */
+
+.selector_in_billing {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #FF6000;
+    margin-bottom: 1.4rem;
+    text-align: center;
+    border: none;
+    background-color: #f0f0f0;
+    margin-left:10px;
 }

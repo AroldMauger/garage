@@ -57,11 +57,17 @@
 </header>
 
 <main class="main-form">
-    <h2 class="form_title">AJOUTER UNE FACTURE</h2>
     {{ form_start(form) }}
+
+    <h2 class="form_title">DEVIS / FACTURE</h2>
+
     <div class="form-container">
         <div class="form-group">
-            <label for="form-name" class="form-label">Nom</label>
+            <label for="form-status" class="form-label">Status</label>
+            {{ form_widget(form.status) }}
+        </div>
+        <div class="form-group">
+            <label for="form-name" class="form-label">Nom du client</label>
             {{ form_widget(form.name) }}
         </div>
         <div class="form-group">

@@ -4,7 +4,9 @@ namespace App\Form;
 
 use App\Entity\Billing;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -23,7 +25,15 @@ class BillingType extends AbstractType
             ->add('numberplate')
             ->add('serialNumber')
             ->add('tva')
-            ->add('items', CollectionType::class, [
+            ->add('status', ChoiceType::class, [
+                'choices' => [
+                    'DEVIS' => 'devis',
+                    'FACTURE' => 'facture',
+                ],
+                'label' => 'Status',
+                'expanded' => false,
+                'multiple' => false,
+            ])            ->add('items', CollectionType::class, [
                 'entry_type' => BillingItemType::class,
                 'allow_add' => true,
                 'by_reference' => false,

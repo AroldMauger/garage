@@ -1,60 +1,146 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Garage Trempu - Gestion RDV</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <title>Garage Trempu - Gestion RDV</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+    <link rel="stylesheet" href="{{ asset('app.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@400;500;700&family=Noto+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/70fabb1b7e.js" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.querySelector('[data-prototype]');
+            const addButton = document.createElement('button');
+            addButton.type = 'button';
+            addButton.textContent = 'Ajouter un item';
+            addButton.classList.add('btn-add-item');
+            container.appendChild(addButton);
 
-        {% block javascripts %}
-{% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
-          <link rel="stylesheet" href="app.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@400;500;700&family=Noto+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-        <script src="https://kit.fontawesome.com/70fabb1b7e.js" crossorigin="anonymous"></script>
-    </head>
-     <body>
-        <header class="header-form">
-            <img class="logo-form" src="logo-garage.png" alt="logo du garage">
-            <a href="/dashboard" class="return-button-form" >Tableau de bord</a>
-        </header>
+            let index = container.querySelectorAll('.form-group').length;
 
-        <main class="main-form">
-            <h2 class="form_title">AJOUTER UN RENDEZ-VOUS</h2>
-            {{ form_start(form) }}
-                <div class="form-date-time_container">
-                    <div class="form-date_container">
-                        <label for="form-date" class="form-label">Date du RDV</label>
-                        {{ form_widget(form.date) }}
-                    </div>
-                </div>
+            addButton.addEventListener('click', function() {
+                const prototype = container.dataset.prototype;
+                const newItem = prototype.replace(/__name__/g, index);
+                const div = document.createElement('div');
+                div.innerHTML = newItem;
+                const deleteButton = document.createElement('button');
+                deleteButton.type = 'button';
+                deleteButton.textContent = 'Supprimer';
+                deleteButton.classList.add('btn-delete-item');
+                div.appendChild(deleteButton);
+                container.insertBefore(div, addButton);
+                deleteButton.addEventListener('click', function() {
+                    div.remove();
+                });
+                index++;
+            });
 
-                <div class="form-date-time_container form-client-info_container">
-                    <div class="form-date_container">
-                        <label for="form-client" class="form-label">Client</label>
-                        {{ form_widget(form.customer) }}
-                    </div>
-                    <div class="form-date_container">
-                        <label for="form-telephone" class="form-label">Téléphone</label>
-                        {{ form_widget(form.phone) }}
-                    </div>
-                </div>
-                <div class="form-vehicule_container">
-                    <label for="form-vehicule" class="form-label">Véhicule</label>
-                    {{ form_widget(form.car) }}
-                </div>
-                <div class="form-purpose_container">
-                    <label for="form-purpose" class="form-label">Motif du RDV</label>
-                    {{ form_widget(form.reason) }}
-                </div>
-                <div class="submit-form-button_container">
-                    <button class="submit-rdv-button">AJOUTER</button>
-                </div>
-            {{ form_end(form) }}
+            container.querySelectorAll('.form-group').forEach(function(group) {
+                const deleteButton = document.createElement('button');
+                deleteButton.type = 'button';
+                deleteButton.textContent = 'Supprimer';
+                deleteButton.classList.add('btn-delete-item');
+                group.appendChild(deleteButton);
+                deleteButton.addEventListener('click', function() {
+                    group.remove();
+                });
+            });
 
-        </main>
-    </body>
+            // Synchronize select value with hidden input field
+            const statusSelect = document.querySelector('.selector_in_billing');
+            const hiddenStatusInput = document.querySelector('input[name="billing[status]"]');
+
+            statusSelect.addEventListener('change', function() {
+                hiddenStatusInput.value = statusSelect.value.toLowerCase();
+            });
+
+            // Initialize hidden input with select value
+            hiddenStatusInput.value = statusSelect.value.toLowerCase();
+        });
+    </script>
+</head>
+<body>
+<header class="header-form">
+    <img class="logo-form" src="{{ asset('logo-garage.png') }}" alt="logo du garage">
+    <a href="/dashboard" class="return-button-form">Tableau de bord</a>
+</header>
+
+<main class="main-form">
+    <h2 class="form_title">AJOUTER
+        <select class="selector_in_billing">
+            <option value="devis">DEVIS</option>
+            <option value="facture">FACTURE</option>
+        </select>
+    </h2>
+
+    {{ form_start(form) }}
+    <div class="form-container">
+        {{ form_widget(form.status) }} {# Hidden field for status #}
+        <div class="form-group">
+            <label for="form-name" class="form-label">Nom du client</label>
+            {{ form_widget(form.name) }}
+        </div>
+        <div class="form-group">
+            <label for="form-adress" class="form-label">Adresse</label>
+            {{ form_widget(form.adress) }}
+        </div>
+        <div class="form-group">
+            <label for="form-creationDate" class="form-label">Facture créée le</label>
+            {{ form_widget(form.creationDate) }}
+        </div>
+        <div class="form-group">
+            <label for="form-brand" class="form-label">Marque</label>
+            {{ form_widget(form.brand) }}
+        </div>
+        <div class="form-group">
+            <label for="form-model" class="form-label">Modèle</label>
+            {{ form_widget(form.model) }}
+        </div>
+        <div class="form-group">
+            <label for="form-mileage" class="form-label">Kilométrage</label>
+            {{ form_widget(form.mileage) }}
+        </div>
+        <div class="form-group">
+            <label for="form-releaseDate" class="form-label">Mise en circulation</label>
+            {{ form_widget(form.releaseDate) }}
+        </div>
+        <div class="form-group">
+            <label for="form-numberplate" class="form-label">Immatriculation</label>
+            {{ form_widget(form.numberplate) }}
+        </div>
+        <div class="form-group">
+            <label for="form-serialNumber" class="form-label">N° de série</label>
+            {{ form_widget(form.serialNumber) }}
+        </div>
+        <div class="form-group">
+            <label for="form-tva" class="form-label">TVA</label>
+            {{ form_widget(form.tva) }}
+        </div>
+
+        <h3>Articles</h3>
+        <div class="items-container" data-prototype="{{ form_widget(form.items.vars.prototype)|e('html_attr') }}">
+            {% for item in form.items %}
+                <div class="form-group">
+                    <label for="{{ item.quantity.vars.id }}" class="form-label">Quantité</label>
+                    {{ form_widget(item.quantity) }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ item.name.vars.id }}" class="form-label">Nom</label>
+                    {{ form_widget(item.name) }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ item.price.vars.id }}" class="form-label">Prix</label>
+                    {{ form_widget(item.price) }}
+                </div>
+            {% endfor %}
+        </div>
+
+        <button type="submit" class="btn-submit">Soumettre</button>
+    </div>
+    {{ form_end(form) }}
+</main>
+
+</body>
 </html>

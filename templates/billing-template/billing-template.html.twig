@@ -1,0 +1,107 @@
+{# templates/billing/pdf.html.twig #}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Facture </title>
+    <link rel="stylesheet" href="{{ asset('billing.css') }}">
+
+</head>
+<body class="page">
+<div class="header">
+    <div class="garage-data">
+        <p class="text-billing">MONSIEUR THOMAS TREMPU</p>
+        <p class="text-billing">16 RUE DU PONT DE PIERRE 14390, CABOURG</p>
+        <p class="text-billing">Tel: 06-44-20-76-38</p>
+    </div>
+   <img class="billing-logo" src="{{ asset('logo-black.png') }}" alt="logo du garage"/>
+</div>
+<div class="client-details-container">
+    <div class="client-details">
+        <p class="text-billing">{{ billing.name }}</p>
+        <p class="text-billing"> {{ billing.adress }}</p>
+    </div>
+</div>
+
+<p >{{ billing.status}} N° {{ billing.id}}</p>
+<p class="text-billing">
+    {% if billing.status == 'DEVIS' %}
+        Établi le {{ billing.creationDate|date('d/m/Y') }}
+    {% elseif billing.status == 'FACTURE' %}
+        Établie le {{ billing.creationDate|date('d/m/Y') }}
+    {% else %}
+        Établi(e) le {{ billing.creationDate|date('d/m/Y') }}
+    {% endif %}
+</p>
+<table class="car-table">
+    <thead class="car-table-title">
+        <th>Véhicule</th>
+    </thead>
+    <tbody class="car-table-body">
+    <tr class="car-column">
+        <td>Marque: <strong>{{ billing.brand}}</strong></td>
+        <td>Modèle: <strong>{{ billing.model}}</strong></td>
+        <td>Kilométrage: <strong>{{ billing.mileage}}</strong></td>
+    </tr>
+    <tr class="car-column">
+        <td>Mise en circulation: <strong>{{ billing.release_date|date('d/m/Y')}}</strong></td>
+        <td>N° de série: <strong>{{ billing.serial_number}}</strong></td>
+        <td>Immatriculation : <strong>{{ billing.numberplate}}</strong></td>
+    </tr>
+    </tbody>
+</table>
+
+<table class="items-table">
+    <thead class="items-table-header">
+        <th>Quantité/Temps</th>
+        <th>Désignation</th>
+        <th>Prix Net</th>
+        <th>Montant HT</th>
+    </thead>
+    <tbody>
+    {% set totalHT = 0 %}
+    {% for item in billing.items %}
+        {% set montantHT = item.quantity * item.price %}
+        {% set totalHT = totalHT + montantHT %}
+        <tr>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.price }}</td>
+            <td>{{ montantHT }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% set tva = totalHT * 0.20 %}
+{% set totalTTC = totalHT + tva %}
+{% set netAPayer = totalTTC %}
+
+<table class="total-table">
+    <tr>
+        <td class="result-title">Total H.T</td>
+        <td class="result-billing">{{ totalHT }} €</td>
+    </tr>
+    <tr>
+        <td class="result-title">Total TVA 20%</td>
+        <td class="result-billing">{{ tva }} €</td>
+    </tr>
+    <tr>
+        <td class="result-title">Total T.T.C</td>
+        <td class="result-billing">{{ totalTTC }} €</td>
+    </tr>
+    <tr class="net-to-pay">
+        <td class="result-title"><strong>Net à payer</strong></td>
+        <td class="result-billing"><strong>{{ netAPayer }} €</strong></td>
+    </tr>
+</table>
+
+
+<footer>
+    <p>Siren  810660605 </p>
+    <p>N° TVA FR58810660605 </p>
+    <p>APE 4520A</p>
+</footer>
+</body>
+
+</html>

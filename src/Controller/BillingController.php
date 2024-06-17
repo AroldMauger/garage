@@ -48,4 +48,35 @@ class BillingController extends AbstractController
     {
         return $this->redirectToRoute('billing_new');
     }
+
+// POUR TESTER LE TWIG
+    #[Route('/billing/view', name: 'billing_view')]
+    public function view(): Response
+    {
+        // Récupérer les données de la facture par ID (simulé pour cet exemple)
+        $billing = [
+            'status' => "FACTURE",
+            'id' => 1,
+            'name' => 'Arold MAUGER',
+            'adress' => '4 ancienne route de Caen, CABOURG',
+            'creationDate' => new \DateTime(),
+            'status' => 'DEVIS',
+            'brand' => 'PEUGEOT',
+            'model' => '307',
+            'mileage' => 320000,
+            'release_date' =>new \DateTime(),
+            'numberplate' => "BP794GR",
+            'serial_number' => '3894JRZ589',
+            'tva' => 20,
+            'items' => [
+                ['quantity' => 2, 'name' => 'Pneus', 'price' => 40],
+                ['quantity' => 1, 'name' => 'Feu arrière', 'price' => 30],
+            ],
+        ];
+
+        // Rendre le template Twig avec les données
+        return $this->render('billing-template/billing-template.html.twig', [
+            'billing' => $billing,
+        ]);
+    }
 }
