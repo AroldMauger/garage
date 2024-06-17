@@ -72,8 +72,8 @@
     {% endfor %}
     </tbody>
 </table>
-
-{% set tva = totalHT * 0.20 %}
+{% set tvaPercentage = billing.tva / 100 %}
+{% set tva = totalHT * tvaPercentage %}
 {% set totalTTC = totalHT + tva %}
 {% set netAPayer = totalTTC %}
 
@@ -83,7 +83,7 @@
         <td class="result-billing">{{ totalHT }} €</td>
     </tr>
     <tr>
-        <td class="result-title">Total TVA 20%</td>
+        <td class="result-title">Total TVA {{ billing.tva }}%</td>
         <td class="result-billing">{{ tva }} €</td>
     </tr>
     <tr>
@@ -95,6 +95,7 @@
         <td class="result-billing"><strong>{{ netAPayer }} €</strong></td>
     </tr>
 </table>
+
 
 
 <footer>

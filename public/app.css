@@ -460,8 +460,8 @@ body {
 .main-form {
     display: flex;
     flex-direction: column;
-    align-items: center;
     margin-top: 1rem;
+    padding-inline:100px;
 }
 
 .form_title {
@@ -480,7 +480,6 @@ body {
     font-size: 1.2rem;
     font-weight: 700;
     color: #333;
-    margin-bottom: 0.8rem;
 }
 
 .input-date{
@@ -639,4 +638,56 @@ body {
     border: none;
     background-color: #f0f0f0;
     margin-left:10px;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: row;
+    gap:30px;
+}
+
+.form-subcontainer {
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    width: 50%;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    gap:20px;
+    justify-content: space-between;
+}
+
+.form-group input {
+    height: 30px;
+}
+
+.items-container {
+    width: 50%;
+}
+
+.btn-submit {
+    border: none;
+    background: black;
+    color: white;
+    padding: 1rem 2rem;
+    font-size: 1.6rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 0.8rem;
+}
+
+.btn-submit:hover {
+    background-color: #FF4500;
+}
+
+.btn-form-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
