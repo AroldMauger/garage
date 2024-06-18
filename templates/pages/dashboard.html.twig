@@ -20,6 +20,7 @@
         <header class="header-dashboard">
             <img class="logo-dashboard" src="logo-garage.png" alt="logo du garage">
             <nav class="nav-dashboard">
+                <a href="{{ path('billing_form') }}">Facture/Devis</a>
                 <a href="/new_appointment">Nouveau RDV</a>
                 <a href="/history">Historique RDV</a>
                 <a href="/logout">Déconnexion</a>
@@ -109,9 +110,6 @@
                             </a>
                             <a href="{{ url("delete", {"id" : appointment.id, "from": "dashboard"}) }}" class="link-in-modal">
                                 <button id="delete-button" class="button-modal">SUPPRIMER</button>
-                            </a>
-                            <a class="link-in-modal" href="{{ path('billing_form') }}">
-                                <button id="invoice-button" class="button-modal">FACTURE/DEVIS</button>
                             </a>
 
                         </aside>

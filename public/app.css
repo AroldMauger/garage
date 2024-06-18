@@ -457,6 +457,13 @@ body {
     width: 12%;
 }
 
+.main-form-add-rdv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+}
+
 .main-form {
     display: flex;
     flex-direction: column;
@@ -690,4 +697,45 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.btn-in-billing-form select{
+    padding:5px;
+    height: 30px;
+    width: 100px;
+}
+
+.btn-add-item, .btn-delete-item {
+    padding:5px;
+    height: 30px;
+    width: 140px;
+    margin-top: 10px;
+}
+
+.btn-add-item {
+    margin-bottom: 20px;
+}
+
+.btn-delete-item {
+    background-color: #ff0404;
+    color:white;
+    border: 1px solid black;
+}
+
+.btn-delete-item:hover {
+    background-color: darkred;
+}
+
+.new-item {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 25px;
+}
+
+.new-item div{
+    display: flex;
+    gap:8px;
 }

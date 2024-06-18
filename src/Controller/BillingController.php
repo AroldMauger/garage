@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Billing;
 use App\Form\BillingType;
+use App\Service\PdfGenerator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,6 +13,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class BillingController extends AbstractController
 {
+    private $pdfGenerator;
+
+    public function __construct(PdfGenerator $pdfGenerator)
+    {
+        $this->pdfGenerator = $pdfGenerator;
+    }
+
     #[Route('/billing/new', name: 'billing_new')]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -29,7 +37,7 @@ class BillingController extends AbstractController
             $entityManager->persist($billing);
             $entityManager->flush();
 
-            return $this->redirectToRoute('billing_success');
+            return $this->redirectToRoute('billing_success', ['id' => $billing->getId()]);
         }
 
         return $this->render('pages/billing_form.html.twig', [
@@ -37,10 +45,18 @@ class BillingController extends AbstractController
         ]);
     }
 
-    #[Route('/billing/success', name: 'billing_success')]
-    public function success(): Response
+    #[Route('/billing/success/{id}', name: 'billing_success')]
+    public function success(int $id, EntityManagerInterface $entityManager): Response
     {
-        return $this->render('pages/billing_success.html.twig');
+        $billing = $entityManager->getRepository(Billing::class)->find($id);
+
+        if (!$billing) {
+            throw $this->createNotFoundException('La facture n\'existe pas');
+        }
+
+        return $this->render('pages/billing_success.html.twig', [
+            'billing' => $billing,
+        ]);
     }
 
     #[Route('/billing_form', name: 'billing_form')]
@@ -49,34 +65,13 @@ class BillingController extends AbstractController
         return $this->redirectToRoute('billing_new');
     }
 
-// POUR TESTER LE TWIG
-    #[Route('/billing/view', name: 'billing_view')]
-    public function view(): Response
+    #[Route('/billing/{id}/download', name: 'billing_download')]
+    public function download(Billing $billing): Response
     {
-        // Récupérer les données de la facture par ID (simulé pour cet exemple)
-        $billing = [
-            'status' => "FACTURE",
-            'id' => 1,
-            'name' => 'Arold MAUGER',
-            'adress' => '4 ancienne route de Caen, CABOURG',
-            'creationDate' => new \DateTime(),
-            'status' => 'DEVIS',
-            'brand' => 'PEUGEOT',
-            'model' => '307',
-            'mileage' => 320000,
-            'release_date' =>new \DateTime(),
-            'numberplate' => "BP794GR",
-            'serial_number' => '3894JRZ589',
-            'tva' => 20,
-            'items' => [
-                ['quantity' => 2, 'name' => 'Pneus', 'price' => 40],
-                ['quantity' => 1, 'name' => 'Feu arrière', 'price' => 30],
-            ],
-        ];
+        $template = 'billing-template/billing-template.html.twig';
+        $data = ['billing' => $billing];
+        $filename = sprintf('facture-%s.pdf', $billing->getId());
 
-        // Rendre le template Twig avec les données
-        return $this->render('billing-template/billing-template.html.twig', [
-            'billing' => $billing,
-        ]);
+        return $this->pdfGenerator->generatePdfResponse($template, $data, $filename);
     }
 }

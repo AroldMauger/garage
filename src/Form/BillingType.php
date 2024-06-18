@@ -27,8 +27,8 @@ class BillingType extends AbstractType
             ->add('tva')
             ->add('status', ChoiceType::class, [
                 'choices' => [
-                    'DEVIS' => 'devis',
-                    'FACTURE' => 'facture',
+                    'DEVIS' => 'DEVIS',
+                    'FACTURE' => 'FACTURE',
                 ],
                 'label' => 'Status',
                 'expanded' => false,

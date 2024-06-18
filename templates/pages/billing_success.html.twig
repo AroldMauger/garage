@@ -20,7 +20,7 @@
     <h2 class="form_title">Confirmation</h2>
     <p class="form_title">Votre facture a bien été créée !</p>
     <div class="submit-form-button_container">
-        <a href="" class="billing-dwl">Télécharger</a>
+        <a href="{{ path('billing_download', { 'id': billing.id }) }}" class="billing-dwl">Télécharger</a>
     </div>
     <div class="submit-form-button_container">
         <a href="/dashboard" class="return-billing">Retour au tableau de bord</a>
